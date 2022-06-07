@@ -4,7 +4,7 @@
 
 #include "Merchant.h"
 #include "utilities.h"
-#include "Player.h"
+using std::cin;
 
 using std::cin;
 
@@ -12,35 +12,43 @@ using std::cin;
 
 
 void Merchant::applyEncounter(Player& player) const{
-    printMerchantInitialMessageForInteractiveEncounter(cout, player.getName, player.getCoins);
+    printMerchantInitialMessageForInteractiveEncounter(cout, player.getName(), player.getCoins());
     int playerDecision;
     cin >> playerDecision;
+    while (cin.fail() || (playerDecision < 0) || (playerDecision > 2)){
+        printInvalidInput();
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> playerDecision;
+    }
     //check if correct input was entered, and ask for correct one until it is solved
     switch (playerDecision){
         case 0 : {
-            printMerchantSummary(cout, player.getName, 0, 0);
+            printMerchantSummary(cout, player.getName(), 0, 0);
             break;
         }
         case 1 : {
-            if (player.getCoins < priceOfHealthPotion){
+            if (player.getCoins() < priceOfHealthPotion){
                 printMerchantInsufficientCoins(cout);
+                break;
             }
             else {
                 player.pay(priceOfHealthPotion);
                 player.heal(1);
             }
-            printMerchantSummary(cout, player.getName, 1, priceOfHealthPotion);
+            printMerchantSummary(cout, player.getName(), 1, priceOfHealthPotion);
             break;
         }
         case 2 : {
-            if (player.getCoins < priceOfBuffBoost){
+            if (player.getCoins() < priceOfBuffBoost){
                 printMerchantInsufficientCoins(cout);
+                break;
             }
             else {
                 player.pay(priceOfBuffBoost);
                 player.buff(1);
             }
-            printMerchantSummary(cout, player.getName, 2, priceOfBuffBoost);
+            printMerchantSummary(cout, player.getName(), 2, priceOfBuffBoost);
             break;
         }
         default :
@@ -51,6 +59,6 @@ void Merchant::applyEncounter(Player& player) const{
 
 
 void Merchant::printInfo() const{
-    printCardDetails( cout, "Treasure");
+    printCardDetails( cout, "Merchant");
     printEndOfCardDetails(cout);
 }

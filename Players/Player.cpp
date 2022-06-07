@@ -136,16 +136,3 @@ ostream& operator<<(ostream& os, Player& player) {
     player.printInfo(os);
     return  os;
 }
-int main(){
-    Wizard HarryPotter("Harry Potter");
-    Rouge Ganav("ganav");
-    Fighter Mcregor("mcregor");
-    cout<<HarryPotter<< endl;
-    cout<<Ganav<< endl;
-    cout<<Mcregor<< endl;
-    cout << Ganav.getHP() << endl;
-    cout << Ganav.getCoins() << endl;
-    Ganav.decreaseForce();
-    cout << Ganav << endl;
-
-};

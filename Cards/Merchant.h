@@ -4,7 +4,6 @@
 
 #ifndef CARD_CPP_MERCHANT_H
 #define CARD_CPP_MERCHANT_H
-#include "Player.h"
 #include "Cards/Card.h"
 
 class Merchant : public Card {

@@ -1,9 +1,7 @@
 
 #include "Card.h"
-#include "Player.h"
 #include <iostream>
 #include <cassert>
-#include "Player.h"
 
 using std::cout;
 using std::endl;
@@ -12,6 +10,11 @@ using std::string;
 Card::Card(CardType type, const CardStats& stats) :
     m_effect(type),
     m_stats(stats){
+}
+
+ostream& operator<<(ostream& os, Card& card){
+    card.printInfo();
+    return os;
 }
 //
 //void Card::applyEncounter(Player& player) const {

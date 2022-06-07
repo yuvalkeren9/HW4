@@ -6,7 +6,6 @@
 #include "Cards/Card.h"
 #include "utilities.h"
 #include <iostream>
-#include "Player.h"
 
 
 Vampire::Vampire() {
@@ -26,11 +25,11 @@ void Vampire::applyEncounter(Player& player) const{
     if (player.getAttackStrength() >= this->m_stats.force) {
         player.levelUp();
         player.addCoins(this->m_stats.loot);
-        printWinBattle(player.getName, "Vampire");
+        printWinBattle(player.getName(), "Vampire");
     } else {
         player.damage(this->m_stats.hpLossOnDefeat);
-        player.decreaseForce;
-        printLossBattle(player.getName, "Vampire");
+        player.decreaseForce();
+        printLossBattle(player.getName(), "Vampire");
     }
 }
 

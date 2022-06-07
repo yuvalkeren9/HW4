@@ -7,11 +7,12 @@
 #include <sstream>
 #include <functional>
 
-#include "Exception.h"
-#include "Players/Player.h"
+//#include "Exception.h"
+//#include "Players/Player.h"
 
 using std::string;
 using std::ostream;
+
 
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -48,7 +49,7 @@ void printPlayerDetails(std::ostream &os, std::string name,  std::string job, in
  *      void
  */
 
-void printCardDetails( std::ostream &os,  std::string name);
+void printCardDetails( std::ostream &os, string name);
 
 /*
  * Prints the final line that seperates messages:
@@ -250,7 +251,7 @@ void printLeaderBoardStartMessage();
  * @return
  *      void
  */
-void printPlayerLeaderBoard(int ranking, Player& player);
+//void printPlayerLeaderBoard(int ranking, Player& player);
 
 /*
  * Prints info indicating the end of the game:

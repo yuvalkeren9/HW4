@@ -6,7 +6,6 @@
 #include "Cards/Card.h"
 #include "utilities.h"
 #include <iostream>
-#include "Player.h"
 
 
 Dragon::Dragon() {
@@ -25,11 +24,11 @@ void Dragon::applyEncounter(Player& player) const{
     if (player.getAttackStrength() >= this->m_stats.force) {
         player.levelUp();
         player.addCoins(this->m_stats.loot);
-        printWinBattle(player.getName, "Dragon");
+        printWinBattle(player.getName(), "Dragon");
     } else {
-        int damageToInflict = player.getHP;
+        int damageToInflict = player.getHP();
         player.damage(damageToInflict);
-        printLossBattle(player.getName, "Dragon");
+        printLossBattle(player.getName(), "Dragon");
     }
 }
 

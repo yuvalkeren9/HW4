@@ -87,7 +87,7 @@ public:
      * @return
      *      void
     */
-    virtual void printInfo() const;       /** Make this throw an exception ! */
+    virtual void printInfo() const = 0;
 
 
     /*
@@ -102,6 +102,7 @@ public:
     Card(const Card&) = default;
     virtual ~Card() = default;
     Card& operator=(const Card& other) = default;
+    friend ostream& operator<<(ostream& os, Card& card);
 
 
 private:

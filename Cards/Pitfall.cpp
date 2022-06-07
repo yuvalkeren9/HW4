@@ -14,5 +14,9 @@ void Pitfall::applyEncounter(Player &player) const {
     const Rouge* rouge = dynamic_cast<const Rouge*>(ptr);
     if (rouge == nullptr){
         player.damage(damageInflictedByPitfall);
+        printPitfallMessage(false);
+    }
+    else{
+        printPitfallMessage(true);
     }
 }

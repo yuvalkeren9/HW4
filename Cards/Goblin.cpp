@@ -6,8 +6,8 @@
 #include "Cards/Card.h"
 #include "utilities.h"
 #include <iostream>
-#include "../Players/player.h"
-
+#include "Players/player.h"
+using std::string;
 
 Goblin::Goblin() {
     m_stats.force = 6;
@@ -26,15 +26,9 @@ void Goblin::applyEncounter(Player& player) const{
     if (player.getAttackStrength() >= this->m_stats.force) {
                 player.levelUp();
                 player.addCoins(this->m_stats.loot);
-                printWinBattle(player.getName, "Goblin");
+                printWinBattle(player.getName(), "Goblin");
             } else {
                player.damage(this->m_stats.hpLossOnDefeat);
-               printLossBattle(player.getName, "Goblin");
+               printLossBattle(player.getName(), "Goblin");
             }
-}
-
-
-int main (){
-    Goblin goblin;
-    goblin.printInfo();
 }
