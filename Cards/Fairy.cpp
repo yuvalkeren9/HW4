@@ -11,7 +11,8 @@ void Fairy::printInfo() const {
 }
 
 void Fairy::applyEncounter(Player &player) const {
-    const Wizard* wizard = dynamic_cast<const Wizard*>(player);
+    Player* ptr = &player;
+    const Wizard* wizard = dynamic_cast<const Wizard*>(ptr);
     if (wizard != nullptr){
         player.heal(healthHealedByFairy);
     }

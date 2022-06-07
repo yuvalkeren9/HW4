@@ -6,6 +6,7 @@
 #define CARD_CPP_BARFIGHT_H
 
 #include "Card.h"
+#include "../Players/Fighter.h"
 
 class Barfight : public Card{
 public:
@@ -15,7 +16,7 @@ public:
     void printInfo() const override;
     void applyEncounter(Player& player) const override;
 private:
-    static const int damamageInflictedByBarFight = 10;
+    static const int damageInflictedByBarFight = 10;
 };
 
 

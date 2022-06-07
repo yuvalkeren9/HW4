@@ -7,6 +7,7 @@
 
 
 #include "Card.h"
+#include "../Players/Wizard.h"
 
 class Fairy : public Card{
 public:

@@ -10,8 +10,9 @@ void Barfight::printInfo() const {
 }
 
 void Barfight::applyEncounter(Player &player) const {
-    const Fighter* fighter = dynamic_cast<const Fighter*>(player);
+    Player* ptr = &player;
+    const Fighter* fighter = dynamic_cast<const Fighter*>(ptr);
     if (fighter == nullptr){
-        player.damage(damamageInflictedByBarFight);
+        player.damage(damageInflictedByBarFight);
     }
 }

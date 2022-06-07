@@ -10,8 +10,9 @@ void Pitfall::printInfo() const {
 }
 
 void Pitfall::applyEncounter(Player &player) const {
-    const Rogue* rogue = dynamic_cast<const Rogue*>(player);
-    if (rogue == nullptr){
-        player.damage(damamageInflictedByPitfall);
+    Player* ptr = &player;    //test this yuval~!!~!!!!
+    const Rouge* rouge = dynamic_cast<const Rouge*>(ptr);
+    if (rouge == nullptr){
+        player.damage(damageInflictedByPitfall);
     }
 }

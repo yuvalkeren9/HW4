@@ -7,6 +7,7 @@
 
 
 #include "Card.h"
+#include "../Players/Rouge.h"
 
 class Pitfall : public Card{
 public:
@@ -16,7 +17,7 @@ public:
     void printInfo() const override;
     void applyEncounter(Player& player) const override;
 private:
-    static const int damamageInflictedByPitfall = 10;
+    static const int damageInflictedByPitfall = 10;
 };
 
 
