@@ -1,9 +1,9 @@
 
 #include "Card.h"
-#include "Player.h"
+#include "Players/Player.h"
 #include <iostream>
 #include <cassert>
-#include "Player.h"
+#include "Players/Player.h"
 
 using std::cout;
 using std::endl;
