@@ -10,6 +10,8 @@
 #include "Exception.h"
 #include "Players/Player.h"
 
+using std::string;
+using std::ostream;
 
 
 /* ---------------------------------------------------------------------------------------------- */

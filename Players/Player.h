@@ -4,15 +4,12 @@
 
 
 #include <iostream>
-#include "utilities.h"
 using std::cout;
 using std::endl;
 using std::string;
-
-
+using std::ostream;
 /** a class that represents a player type. The class hold the player's name, his current level, current force, his max HP, current player's HP, and
  * the amount of coins he has */
-
 class Player {
 
 public:
@@ -22,38 +19,50 @@ public:
 
     explicit Player(const string& name, const int maxHP = DEFAULT_MAX_HP ,const int force = DEFAULT_FORCE);
     Player(const Player& player) = default;
-    ~Player() = default;
+
+
+
+    virtual  ~Player() = default;
     Player& operator=(const Player&) = default;
 
     /** function that prints the Player's info */
-    void printInfo() const;
+    virtual void printInfo(ostream &os) const=0;
 
     /** increases the player's level by 1 */
     Player& levelUp();
 
     /** getter functions */
     int getLevel() const;
-    int getAttackStrength() const;
+    virtual int getAttackStrength() const;
+    string getName() const;
+    int getCoins();
+    int getHP();
+
+    /** decrease the player's force by 1 */
+    void decreaseForce();
 
     /** increases the player's force by the amount received as argument */
-    Player& buff(const int addedForce);
+   virtual Player& buff(const int addedForce);
 
     /** increases the player's hp by the amount received as argument */
-    Player& heal(const int addedHP);
+   virtual Player& heal(const int addedHP);
 
     /** decreases the player's hp by the amount received as argument */
-    Player& damage(const int damageInflicted);
+    virtual   Player& damage(const int damageInflicted);
 
     /** methods returns whether a player's hp is a 0 (returns true if hp is 0) */
     bool isKnockedOut() const;
 
     /** increases the player's amount of coins by the amount received as argument */
-    Player& addCoins(const int numOfCoins);
+    virtual Player& addCoins(const int numOfCoins);
 
     /** decreases the player's amount of coins by the amount received as argument. If player doesn't have enough coins, nothing will happen
      * and function will return false. If succeeded, true will be returned.*/
     bool pay(const int price);
-private:
+    friend ostream& operator<<(ostream& os,Player& player);
+
+
+        protected:
     string m_name;   //Character's name
     int m_level;     //Player's level
     int m_force;     //Player's force
@@ -62,9 +71,8 @@ private:
     int m_coins;     //Player's amount of coins he currently holds
 
     /** defining default values for the class */
-
     static const int DEFAULT_MAX_HP = 100;
     static const int DEFAULT_FORCE = 5;
-
 };
+
 #endif //HW2_PLAYER_H

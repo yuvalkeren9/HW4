@@ -3,6 +3,15 @@
 #include <iostream>
 #include <cassert>
 
+#include "Players/Player.h"
+#include "Players/Fighter.h"
+#include "Players/Wizard.h"
+#include "Players/Rouge.h"
+
+
+
+using std::ostream;
+
 using std::cout;
 using std::endl;
 using std::string;
@@ -23,12 +32,12 @@ Player::Player(const string& name, const int maxHP, const int force) :
         this->m_force = DEFAULT_FORCE;
     }
 }
-
-void Player::printInfo() const {
-    const char* nameSent = m_name.c_str();     //converting from string type to char* type
-    printPlayerInfo(nameSent, this->m_level, this->m_force, this->m_HP, this->m_coins);
-    //delete[] nameSent;
-}
+//
+//void Player::printInfo() const {
+//    const char* nameSent = m_name.c_str();     //converting from string type to char* type
+//    printPlayerInfo(nameSent, this->m_level, this->m_force, this->m_HP, this->m_coins);
+//
+//}
 
 Player& Player::levelUp(){
     if (this->m_level <10 ){
@@ -105,3 +114,38 @@ bool Player::pay(const int price){
 int Player::getAttackStrength() const{
     return (this->m_level + this->m_force);
 }
+
+string Player::getName() const{
+    return this->m_name;
+}
+
+void Player::decreaseForce(){
+    if(this->m_force>0)
+    {
+        this->m_force= this->m_force-1;
+    }
+}
+
+int Player::getCoins(){
+    return this->m_coins;
+}
+int Player::getHP(){
+    return this->m_HP;
+}
+ostream& operator<<(ostream& os, Player& player) {
+    player.printInfo(os);
+    return  os;
+}
+int main(){
+    Wizard HarryPotter("Harry Potter");
+    Rouge Ganav("ganav");
+    Fighter Mcregor("mcregor");
+    cout<<HarryPotter<< endl;
+    cout<<Ganav<< endl;
+    cout<<Mcregor<< endl;
+    cout << Ganav.getHP() << endl;
+    cout << Ganav.getCoins() << endl;
+    Ganav.decreaseForce();
+    cout << Ganav << endl;
+
+};
