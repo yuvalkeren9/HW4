@@ -102,7 +102,7 @@ public:
     Card(const Card&) = default;
     virtual ~Card() = default;
     Card& operator=(const Card& other) = default;
-    friend ostream& operator<<(ostream& os, Card& card);
+    friend std::ostream& operator<<(std::ostream& os, Card& card);
 
 
 private:

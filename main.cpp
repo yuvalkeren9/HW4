@@ -10,6 +10,8 @@
 #include "Players/Fighter.h"
 #include "Players/Rouge.h"
 #include <memory>
+#include "Exception.h"
+#include "Mtmchkin.h"
 
 using std::cin;
 using std::cout;
@@ -21,16 +23,17 @@ using namespace std;
 static const string allLettersInABC = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 int getNumberOfPlayers();
-queue<shared_ptr<Player>> createPlayersQueue(int numberOfPlayers);
+queue<unique_ptr<Player>> createPlayersQueue(int numberOfPlayers);
 bool checkPlayerName(const string& playerName);
 bool checkPlayerType(const string& playerType);
 
 
 
 int main(){
+    Mtmchkin game("deck.txt");
     printStartGameMessage();
     int numOfPlayers = getNumberOfPlayers();
-    queue<shared_ptr<Player>> playersQueue = createPlayersQueue(numOfPlayers);
+    queue<unique_ptr<Player>> playersQueue = createPlayersQueue(numOfPlayers);
     playersQueue.front()->printInfo(cout);
     playersQueue.pop();
     cout << endl;
@@ -54,9 +57,9 @@ int getNumberOfPlayers(){
     return numOfPlayers;
 }
 
-queue<shared_ptr<Player>> createPlayersQueue(int numberOfPlayers){
+queue<unique_ptr<Player>> createPlayersQueue(int numberOfPlayers){
     int counter = 0;
-    queue<shared_ptr<Player>> temp;
+    queue<unique_ptr<Player>> temp;
     while (counter != numberOfPlayers){
         printInsertPlayerMessage();
         string playerName;
@@ -72,16 +75,16 @@ queue<shared_ptr<Player>> createPlayersQueue(int numberOfPlayers){
             continue;
         }
         if (playerType == "Wizard"){
-            shared_ptr<Player> tempWizard(new Wizard(playerName));
-            temp.push(tempWizard);
+            //unique_ptr<Player> tempWizard(new Wizard(playerName));
+            temp.push(unique_ptr<Player> (new Wizard(playerName)));
         }
         else if (playerType == "Fighter"){
-            shared_ptr<Player> tempFighter(new Fighter(playerName));
-            temp.push(tempFighter);
+            //unique_ptr<Player> tempFighter(new Fighter(playerName));
+            temp.push(unique_ptr<Player> (new Fighter(playerName)));
         }
         else {
-            shared_ptr<Player> tempRogue(new Rouge(playerName));
-            temp.push(tempRogue);
+            //unique_ptr<Player> tempRogue(new Rouge(playerName));
+            temp.push(unique_ptr<Player> (new Rouge(playerName)));
         }
         counter++;
     }

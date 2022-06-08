@@ -9,6 +9,7 @@
 using std::cout;
 using std::endl;
 using std::string;
+using std::ostream;
 
 
 Wizard::Wizard(const string& name,const int force):Player( name,force){

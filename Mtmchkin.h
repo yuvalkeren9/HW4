@@ -2,6 +2,9 @@
 #define MTMCHKIN_H_
 
 #include <string>
+#include <memory>
+#include <queue>
+#include "Cards/Card.h"
 
 class Mtmchkin{
 
@@ -48,6 +51,10 @@ public:
     *          int - number of rounds played
     */
     int getNumberOfRounds() const;
+private:
+    static bool checkCardType(const std::string& card);
+    static std::shared_ptr<Card> getPointerToNewCard(const std::string& cardName);
+    std::queue<std::shared_ptr<Card>> m_CardDeck;
 };
 
 

@@ -9,6 +9,7 @@
 using std::cout;
 using std::endl;
 using std::string;
+using std::ostream;
 
 
 Rouge::Rouge(const string& name,const int force):Player( name,  force){

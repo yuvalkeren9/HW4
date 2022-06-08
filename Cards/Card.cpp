@@ -6,6 +6,7 @@
 using std::cout;
 using std::endl;
 using std::string;
+using std::ostream;
 
 Card::Card(CardType type, const CardStats& stats) :
     m_effect(type),
