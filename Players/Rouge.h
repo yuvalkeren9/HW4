@@ -6,14 +6,15 @@
 #define HW4_ROUGE_H
 #include "Player.h"
 #include "../utilities.h"
+#include <cstring>
 
 class Rouge: public Player{
 
 public:
     ~Rouge() override =default;
-    explicit Rouge(const string& name,const int force = DEFAULT_FORCE);
+    explicit Rouge(const std::string& name,const int force = DEFAULT_FORCE);
     Rouge& addCoins(const int numOfCoins) override;
-    void printInfo(ostream &os) const override;
+    void printInfo(std::ostream &os) const override;
 };
 
 

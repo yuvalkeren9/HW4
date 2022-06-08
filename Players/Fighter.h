@@ -11,9 +11,9 @@ class Fighter: public Player{
 
 public:
     ~Fighter() override =default;
-  explicit Fighter(const string& name,const int force = DEFAULT_FORCE);
+  explicit Fighter(const std::string& name,const int force = DEFAULT_FORCE);
     int getAttackStrength() const override;
-    void printInfo(ostream &os) const override;
+    void printInfo(std::ostream &os) const override;
 };
 
 #endif //HW4_FIGHTER_H
