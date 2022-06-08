@@ -1,6 +1,8 @@
 #ifndef MTMCHKIN_H_
 #define MTMCHKIN_H_
 
+#include <string>
+
 class Mtmchkin{
 
 public:
@@ -12,7 +14,7 @@ public:
     * @return
     *      A new instance of Mtmchkin.
     */
-    Mtmchkin(const string fileName);
+    Mtmchkin(const std::string fileName);
     
     /*
     * Play the next Round of the game - according to the instruction in the exercise document.

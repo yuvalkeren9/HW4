@@ -11,7 +11,6 @@ class Wizard: public Player{
 
 public:
     ~Wizard() override =default;
-    Wizard();
     explicit Wizard(const string& name, const int maxHP = DEFAULT_MAX_HP ,const int force = DEFAULT_FORCE);
     Wizard& heal(const int addedHP) override;
     void printInfo(ostream &os) const override;
