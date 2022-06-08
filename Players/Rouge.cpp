@@ -11,7 +11,7 @@ using std::endl;
 using std::string;
 
 
-Rouge::Rouge(const string& name, const int maxHP, const int force):Player( name,  maxHP,  force){
+Rouge::Rouge(const string& name,const int force):Player( name,  force){
 }
 Rouge& Rouge::addCoins(const int numOfCoins){
     assert(numOfCoins);

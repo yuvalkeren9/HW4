@@ -8,6 +8,9 @@
 #include <iostream>
 #include "Players/player.h"
 using std::string;
+using std::cout;
+using std::endl;
+
 
 Goblin::Goblin() {
     m_stats.force = 6;

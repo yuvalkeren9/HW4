@@ -3,6 +3,10 @@
 //
 
 #include "Pitfall.h"
+using std::cout;
+using std::endl;
+using std::string;
+
 
 void Pitfall::printInfo() const {
     printCardDetails( cout, "Pitfall");

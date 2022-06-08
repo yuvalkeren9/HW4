@@ -11,7 +11,7 @@ class Fighter: public Player{
 
 public:
     ~Fighter() override =default;
-  explicit Fighter(const string& name, const int maxHP = DEFAULT_MAX_HP ,const int force = DEFAULT_FORCE);
+  explicit Fighter(const string& name,const int force = DEFAULT_FORCE);
     int getAttackStrength() const override;
     void printInfo(ostream &os) const override;
 };
