@@ -11,7 +11,7 @@ using std::endl;
 using std::string;
 
 
-Fighter::Fighter(const string& name, const int maxHP, const int force):Player( name,  maxHP,  force){
+Fighter::Fighter(const string& name,const int force):Player( name, force){
 }
 int Fighter::getAttackStrength() const{
     return (this->m_level + 2*(this->m_force));

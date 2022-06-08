@@ -16,18 +16,13 @@ using std::cout;
 using std::endl;
 using std::string;
 
-Player::Player(const string& name, const int maxHP, const int force) :
+Player::Player(const string& name, const int force) :
     m_name(name),
-    m_level(1),
+    m_level(DEFAULT_ENTRY_LEVEL),
     m_force(force),
-    m_maxHP(maxHP),
-    m_HP(maxHP),
-    m_coins(0)
+    m_HP(DEFAULT_MAX_HP),
+    m_coins(DEFAULT_COINS)
 {
-    if (maxHP <= 0){
-        this->m_maxHP = DEFAULT_MAX_HP;
-        this->m_HP = DEFAULT_MAX_HP;
-    }
     if (force <= 0){
         this->m_force = DEFAULT_FORCE;
     }
@@ -64,8 +59,8 @@ Player& Player::heal(const int addedHP){
     if (addedHP < 0){
         return *this;
     }
-    if(this->m_HP + addedHP >= this->m_maxHP){
-        this->m_HP = this->m_maxHP;
+    if(this->m_HP + addedHP >= this->DEFAULT_MAX_HP){
+        this->m_HP = this->DEFAULT_MAX_HP;
     }
     else{
         this->m_HP += addedHP;

@@ -11,15 +11,15 @@ using std::endl;
 using std::string;
 
 
-Wizard::Wizard(const string& name, const int maxHP, const int force):Player( name,  maxHP,  force){
+Wizard::Wizard(const string& name,const int force):Player( name,force){
 }
 Wizard& Wizard::heal(const int addedHP){
     assert(addedHP >=0);
     if (addedHP < 0){
         return *this;
     }
-    if(this->m_HP + 2*addedHP >= this->m_maxHP){
-        this->m_HP = this->m_maxHP;
+    if(this->m_HP + 2*addedHP >= this->DEFAULT_MAX_HP){
+        this->m_HP = this->DEFAULT_MAX_HP;
     }
     else{
         this->m_HP += 2*addedHP;

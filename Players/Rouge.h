@@ -11,7 +11,7 @@ class Rouge: public Player{
 
 public:
     ~Rouge() override =default;
-    explicit Rouge(const string& name, const int maxHP = DEFAULT_MAX_HP ,const int force = DEFAULT_FORCE);
+    explicit Rouge(const string& name,const int force = DEFAULT_FORCE);
     Rouge& addCoins(const int numOfCoins) override;
     void printInfo(ostream &os) const override;
 };

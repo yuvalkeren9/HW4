@@ -3,6 +3,11 @@
 //
 
 #include "Barfight.h"
+#include "Players/Fighter.h"
+using std::cout;
+using std::endl;
+using std::string;
+
 
 void Barfight::printInfo() const {
     printCardDetails( cout, "Barfight");

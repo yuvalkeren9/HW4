@@ -15,8 +15,10 @@
 #include "Cards/Pitfall.h"
 #include "Cards/Vampire.h"
 #include "Cards/Treasure.h"
-
+using std::cout;
 using std::endl;
+using std::string;
+
 
 
 
@@ -29,8 +31,8 @@ int main() {
     Pitfall pitfall;
     Treasure treasure;
     Merchant merchant;
-    Rouge ganav("Cenzor", 200, 3);
-    Wizard harry("HarryPotter", 100, 2);
+    Rouge ganav("Cenzor", 3);
+    Wizard harry("HarryPotter", 2);
     Fighter habib("Habib", 500);
     cout << ganav << endl;
     cout << harry << endl;
@@ -47,9 +49,6 @@ int main() {
     cout << treasure << endl;
     cout << merchant << endl;
     merchant.applyEncounter(habib);
-
-
-
-
+    cout << habib << endl << endl;
     return 0;
 }

@@ -3,7 +3,9 @@
 //
 
 #include "Treasure.h"
-
+using std::cout;
+using std::endl;
+using std::string;
 
 Treasure::Treasure() {
     m_stats.loot = 10;

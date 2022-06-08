@@ -4,6 +4,10 @@
 
 #include "Fairy.h"
 
+using std::cout;
+using std::endl;
+using std::string;
+
 
 void Fairy::printInfo() const {
     printCardDetails( cout, "Fairy");
