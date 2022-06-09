@@ -28,6 +28,13 @@ using namespace std;
 
 int main(){
     Mtmchkin game("deck.txt");
+    game.playRound();
+    game.playRound();
+    game.playRound();
+    game.playRound();
+    game.playRound();
+    game.printLeaderBoard();
+
 
     return 0;
 

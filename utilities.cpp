@@ -201,10 +201,10 @@ void printLeaderBoardStartMessage()
     cout << "Ranking    Player Name     Level     Force HP    Coins Job" << endl;
 }
 
-//void printPlayerLeaderBoard(int ranking, Player& player)
-//{
-//    cout << ranking << "          " << player << endl;
-//}
+void printPlayerLeaderBoard(int ranking, Player& player)
+{
+    cout << ranking << "          " << player << endl;
+}
 
 void printGameEndMessage()
 {

@@ -15,6 +15,7 @@
 #include "Cards/Barfight.h"
 #include "Cards/Pitfall.h"
 #include "Cards/Fairy.h"
+#include "utilities.h"
 
 
 
@@ -26,11 +27,15 @@ using std::string;
 using std::getline;
 using std::shared_ptr;
 using std::cin;
-using std::unique_ptr;
+using std::shared_ptr;
 using namespace std;
+using std::vector;
+using std::deque;
 
+/** Mtmchkin Methods */
 
-Mtmchkin::Mtmchkin(const std::string fileName) {
+/** Mtmchkin Constructor */
+Mtmchkin::Mtmchkin(const std::string fileName) : m_CurrentRoundNum(1) {
     ifstream source(fileName);
     if(!source){
         throw DeckFileNotFound();
@@ -52,13 +57,76 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
     }
     /** Now we initialise the player */
     printStartGameMessage();
-    int numOfPlayers = getNumberOfPlayers();
+    m_numOfPlayers = getNumberOfPlayers();
     try {
-        m_PlayersQueue = createPlayersQueue(numOfPlayers);
+        m_PlayersVector = createPlayersVector(m_numOfPlayers);
     }
     catch (bad_alloc& e){}; //do something
+
+    /** Now we initilize the leaderboard */
+     m_stillInGame = m_PlayersVector;
 }
 
+
+void Mtmchkin::playRound(){
+    printRoundStartMessage(m_CurrentRoundNum);
+    int currentPlayerIndex = 0;
+    for (vector<shared_ptr<Player>>::iterator it = m_PlayersVector.begin(); it != m_PlayersVector.end(); ){
+            printTurnStartMessage((**it).getName());
+            m_CardDeck.front()->applyEncounter(**it);
+            shared_ptr<Card> temp = m_CardDeck.front();   //maybe do as function (maybe)
+            m_CardDeck.push(temp);
+            m_CardDeck.pop();
+        if ((**it).isKnockedOut()){
+            updateLeaderboard(false, it, currentPlayerIndex);
+            m_PlayersVector.erase(it);         //LEADERBOARD UPDATE
+            continue;
+        }
+        if ((**it).getLevel() == 10){
+            updateLeaderboard(true, it, currentPlayerIndex);
+            m_PlayersVector.erase(it);    //LEADERBOARD UPDATE
+            continue;
+        }
+        ++it;
+        ++currentPlayerIndex;
+    }
+    if(this->isGameOver()){
+        printGameEndMessage();
+    }
+    ++m_CurrentRoundNum;
+
+}
+
+int Mtmchkin::getNumberOfRounds() const {
+    return this->m_CurrentRoundNum;
+}
+
+bool Mtmchkin::isGameOver() const {
+    return (m_PlayersVector.empty());
+}
+
+void Mtmchkin::printLeaderBoard() const {
+    printLeaderBoardStartMessage();
+    int counter = 1;
+    for (const shared_ptr<Player>& data : m_Winners){
+        printPlayerLeaderBoard(counter, *data);
+        ++counter;
+    }
+    for (const shared_ptr<Player>& data : m_stillInGame){
+        printPlayerLeaderBoard(counter, *data);
+        ++counter;
+    }
+    for (const shared_ptr<Player>& data : m_Losers){
+        printPlayerLeaderBoard(counter, *data);
+        ++counter;
+    }
+}
+
+
+
+
+
+/** Card Initilzing Functions */
 
 bool Mtmchkin::checkCardType(const std::string& card){
     string availableCardTypes[] = {"Goblin", "Vampire", "Dragon", "Pitfall", "Fairy", "Barfight", "Merchant", "Treasure"};
@@ -117,9 +185,9 @@ int Mtmchkin::getNumberOfPlayers(){
 }
 
 
-queue<unique_ptr<Player>> Mtmchkin::createPlayersQueue(int numberOfPlayers){
+vector<shared_ptr<Player>> Mtmchkin::createPlayersVector(int numberOfPlayers){
     int counter = 0;
-    queue<unique_ptr<Player>> temp;
+    vector<shared_ptr<Player>> temp;
     while (counter != numberOfPlayers){
         printInsertPlayerMessage();
         string playerName;
@@ -135,20 +203,20 @@ queue<unique_ptr<Player>> Mtmchkin::createPlayersQueue(int numberOfPlayers){
             continue;
         }
         try{
-            pushingPlayerToQueue(temp, playerType, playerName);
+            pushingPlayerToVector(temp, playerType, playerName);
         }
         catch (std::bad_alloc &e){};    //dont forget to do something
 //        if (playerType == "Wizard"){
-//            //unique_ptr<Player> tempWizard(new Wizard(playerName));
-//            temp.push(unique_ptr<Player> (new Wizard(playerName)));
+//            //shared_ptr<Player> tempWizard(new Wizard(playerName));
+//            temp.push(shared_ptr<Player> (new Wizard(playerName)));
 //        }
 //        else if (playerType == "Fighter"){
-//            //unique_ptr<Player> tempFighter(new Fighter(playerName));
-//            temp.push(unique_ptr<Player> (new Fighter(playerName)));
+//            //shared_ptr<Player> tempFighter(new Fighter(playerName));
+//            temp.push(shared_ptr<Player> (new Fighter(playerName)));
 //        }
 //        else {
-//            //unique_ptr<Player> tempRogue(new Rouge(playerName));
-//            temp.push(unique_ptr<Player> (new Rouge(playerName)));
+//            //shared_ptr<Player> tempRogue(new Rouge(playerName));
+//            temp.push(shared_ptr<Player> (new Rouge(playerName)));
 //        }
         counter++;
     }
@@ -176,17 +244,51 @@ bool Mtmchkin::checkPlayerType(const string& playerType){
 }
 
 
-void Mtmchkin::pushingPlayerToQueue(queue<unique_ptr<Player>> &Players, const string &playerType, const string &playerName){
+void Mtmchkin::pushingPlayerToVector(vector<shared_ptr<Player>> &Players, const string &playerType, const string &playerName){
     if (playerType == "Wizard"){
-        Players.push(unique_ptr<Player> (new Wizard(playerName)));
+        Players.push_back(shared_ptr<Player> (new Wizard(playerName)));
     }
     else if (playerType == "Fighter"){
-        Players.push(unique_ptr<Player> (new Fighter(playerName)));
+        Players.push_back(shared_ptr<Player> (new Fighter(playerName)));
     }
     else {
-        Players.push(unique_ptr<Player> (new Rouge(playerName)));
+        Players.push_back(shared_ptr<Player> (new Rouge(playerName)));
     }
 
 }
 
 
+/** Helper functions */
+//
+//void Mtmchkin::updateLeaderboard(bool isWinner, shared_ptr<Player>& playerPtr, int index){          //if we have time, make this an enum
+//    vector<shared_ptr<Player>> temp;
+//    shared_ptr<Player> tempPtr = playerPtr;
+//    if(isWinner){
+//        vector<shared_ptr<Player>>::iterator it = m_Leaderboard.begin();
+//        for (int i= 0; i < m_leftIndex ; ++i, ++it) {
+//            temp.push_back(*it);
+//        }
+//        temp.push_back(tempPtr);
+//        while ()
+//        m_Leaderboard.erase(it);
+//        ++m_leftIndex;
+//        for (int i = m_leftIndex; i < m_Leaderboard.size(); ++i, ++it)
+//    }
+//
+//}
+
+
+void Mtmchkin::updateLeaderboard(bool isWinner, vector<shared_ptr<Player>>::iterator& playerIt, int index){
+    shared_ptr<Player> tempPtr = *playerIt;
+    if(isWinner){
+        m_Winners.push_back(tempPtr);
+    }
+    else {
+        m_Losers.push_front(tempPtr);
+    }
+    vector<shared_ptr<Player>>::iterator it = m_stillInGame.begin();
+    for(int i=0; i < index; ++i ){
+        ++it;
+    }
+    m_stillInGame.erase(it);
+}

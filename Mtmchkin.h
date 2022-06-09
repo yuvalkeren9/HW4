@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include <queue>
+#include <stack>
 #include "Cards/Card.h"
 
 
@@ -58,14 +59,22 @@ public:
 private:
     static bool checkCardType(const std::string& card);
     static std::shared_ptr<Card> getPointerToNewCard(const std::string& cardName);
+    int m_CurrentRoundNum;
+    int m_numOfPlayers;
     std::queue<std::shared_ptr<Card>> m_CardDeck;
-    std::queue<std::unique_ptr<Player>> m_PlayersQueue;
+    std::vector<std::shared_ptr<Player>> m_PlayersVector;
+    std::vector<std::shared_ptr<Player>> m_stillInGame;
+    std::deque<std::shared_ptr<Player>> m_Winners;
+    std::deque<std::shared_ptr<Player>> m_Losers;
+    void updateLeaderboard(bool isWinner, std::vector<std::shared_ptr<Player>>::iterator& playerIt, int index);
+
+
     static int getNumberOfPlayers();
-    static std::queue<std::unique_ptr<Player>> createPlayersQueue(int numberOfPlayers);
+    static std::vector<std::shared_ptr<Player>> createPlayersVector(int numberOfPlayers);
     static bool checkPlayerName(const std::string& playerName);
     static bool checkPlayerType(const std::string& playerType);
-    static void pushingPlayerToQueue(std::queue<std::unique_ptr<Player>> &Players, const std::string &playerType, const std::string &playerName); //add bad alloc
-    static const int meow = 5;
+    static void pushingPlayerToVector(std::vector<std::shared_ptr<Player>> &Players, const std::string &playerType, const std::string &playerName); //add bad alloc
+
 
 };
 

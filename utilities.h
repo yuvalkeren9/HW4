@@ -7,8 +7,8 @@
 #include <sstream>
 #include <functional>
 
-//#include "Exception.h"
-//#include "Players/Player.h"
+#include "Exception.h"
+#include "Players/Player.h"
 
 /* ---------------------------------------------------------------------------------------------- */
  
@@ -246,7 +246,7 @@ void printLeaderBoardStartMessage();
  * @return
  *      void
  */
-//void printPlayerLeaderBoard(int ranking, Player& player);
+void printPlayerLeaderBoard(int ranking, Player& player);
 
 /*
  * Prints info indicating the end of the game:
