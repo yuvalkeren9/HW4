@@ -35,7 +35,7 @@ using std::deque;
 /** Mtmchkin Methods */
 
 /** Mtmchkin Constructor */
-Mtmchkin::Mtmchkin(const std::string fileName) : m_CurrentRoundNum(1) {
+Mtmchkin::Mtmchkin(const std::string fileName) : m_CurrentRoundNum(0) {
     ifstream source(fileName);
     if(!source){
         throw DeckFileNotFound();
@@ -69,7 +69,7 @@ Mtmchkin::Mtmchkin(const std::string fileName) : m_CurrentRoundNum(1) {
 
 
 void Mtmchkin::playRound(){
-    printRoundStartMessage(m_CurrentRoundNum);
+    printRoundStartMessage(m_CurrentRoundNum + 1);
     int currentPlayerIndex = 0;
     for (vector<shared_ptr<Player>>::iterator it = m_PlayersVector.begin(); it != m_PlayersVector.end(); ){
             printTurnStartMessage((**it).getName());
@@ -90,11 +90,10 @@ void Mtmchkin::playRound(){
         ++it;
         ++currentPlayerIndex;
     }
+    ++m_CurrentRoundNum;
     if(this->isGameOver()){
         printGameEndMessage();
     }
-    ++m_CurrentRoundNum;
-
 }
 
 int Mtmchkin::getNumberOfRounds() const {
@@ -188,24 +187,28 @@ int Mtmchkin::getNumberOfPlayers(){
 vector<shared_ptr<Player>> Mtmchkin::createPlayersVector(int numberOfPlayers){
     int counter = 0;
     vector<shared_ptr<Player>> temp;
-    while (counter != numberOfPlayers){
+    for (int i=0; i < numberOfPlayers; ++i) {
+        bool flag = false;
         printInsertPlayerMessage();
-        string playerName;
-        getline(cin, playerName, ' ');
-        string playerType;
-        getline(cin, playerType);
-        if (!checkPlayerName(playerName)){
-            printInvalidName();
-            continue;
-        }
-        if(!checkPlayerType(playerType)){
-            printInvalidClass();
-            continue;
-        }
-        try{
-            pushingPlayerToVector(temp, playerType, playerName);
-        }
-        catch (std::bad_alloc &e){};    //dont forget to do something
+        while (flag == false) {
+            string playerName;
+            cin >> playerName;
+            //getline(cin, playerName, ' ');
+            string playerType;
+            cin >> playerType;
+            //getline(cin, playerType);
+            if (!checkPlayerName(playerName)) {
+                printInvalidName();
+                continue;
+            }
+            if (!checkPlayerType(playerType)) {
+                printInvalidClass();
+                continue;
+            }
+            try {
+                pushingPlayerToVector(temp, playerType, playerName);
+            }
+            catch (std::bad_alloc &e) {};    //dont forget to do something
 //        if (playerType == "Wizard"){
 //            //shared_ptr<Player> tempWizard(new Wizard(playerName));
 //            temp.push(shared_ptr<Player> (new Wizard(playerName)));
@@ -215,10 +218,11 @@ vector<shared_ptr<Player>> Mtmchkin::createPlayersVector(int numberOfPlayers){
 //            temp.push(shared_ptr<Player> (new Fighter(playerName)));
 //        }
 //        else {
-//            //shared_ptr<Player> tempRogue(new Rouge(playerName));
-//            temp.push(shared_ptr<Player> (new Rouge(playerName)));
+//            //shared_ptr<Player> tempRogue(new Rogue(playerName));
+//            temp.push(shared_ptr<Player> (new Rogue(playerName)));
 //        }
-        counter++;
+            flag = true;
+        }
     }
     return temp;
 }
@@ -252,7 +256,7 @@ void Mtmchkin::pushingPlayerToVector(vector<shared_ptr<Player>> &Players, const 
         Players.push_back(shared_ptr<Player> (new Fighter(playerName)));
     }
     else {
-        Players.push_back(shared_ptr<Player> (new Rouge(playerName)));
+        Players.push_back(shared_ptr<Player> (new Rogue(playerName)));
     }
 
 }

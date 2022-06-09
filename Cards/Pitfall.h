@@ -7,7 +7,7 @@
 
 
 #include "Card.h"
-#include "../Players/Rouge.h"
+#include "../Players/Rogue.h"
 
 class Pitfall : public Card{
 public:

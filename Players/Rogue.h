@@ -8,12 +8,12 @@
 #include "../utilities.h"
 #include <cstring>
 
-class Rouge: public Player{
+class Rogue: public Player{
 
 public:
-    ~Rouge() override =default;
-    explicit Rouge(const std::string& name,const int force = DEFAULT_FORCE);
-    Rouge& addCoins(const int numOfCoins) override;
+    ~Rogue() override =default;
+    explicit Rogue(const std::string& name,const int force = DEFAULT_FORCE);
+    Rogue& addCoins(const int numOfCoins) override;
     void printInfo(std::ostream &os) const override;
 };
 

@@ -8,7 +8,7 @@
 #include <queue>
 #include "Players/Wizard.h"
 #include "Players/Fighter.h"
-#include "Players/Rouge.h"
+#include "Players/Rogue.h"
 #include <memory>
 #include "Exception.h"
 #include "Mtmchkin.h"
@@ -34,7 +34,6 @@ int main(){
     game.playRound();
     game.playRound();
     game.printLeaderBoard();
-
 
     return 0;
 

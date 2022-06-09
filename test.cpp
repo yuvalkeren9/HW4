@@ -23,6 +23,12 @@
 
 using std::unique_ptr;
 using std::cout;
+using std::string;
+using std::fstream ;
+using std::endl;
+using std::cerr;
+using std::istringstream;
+using std::ofstream;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -160,7 +166,7 @@ bool playersPrintsTest(){
 
 bool testCard()
 {
-    vector<unique_ptr<Card>> cards;
+    std::vector<unique_ptr<Card>> cards;
     cards.push_back(unique_ptr<Card>(new Goblin()));
     cards.push_back(unique_ptr<Card>(new Vampire()));
     cards.push_back(unique_ptr<Card>(new Dragon()));
@@ -186,7 +192,7 @@ bool gameRunTest(){
 //   init cin from file
     std::ifstream in("in.txt");
     if(!in.is_open()){
-        throw exception();
+        throw std::exception();
     }
     std::cin.rdbuf(in.rdbuf());
 

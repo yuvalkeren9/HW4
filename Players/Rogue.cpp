@@ -2,7 +2,7 @@
 // Created by eladm on 07/06/2022.
 //
 
-#include "Rouge.h"
+#include "Rogue.h"
 #include <iostream>
 #include <cassert>
 
@@ -12,9 +12,9 @@ using std::string;
 using std::ostream;
 
 
-Rouge::Rouge(const string& name,const int force):Player( name,  force){
+Rogue::Rogue(const string& name,const int force):Player( name,  force){
 }
-Rouge& Rouge::addCoins(const int numOfCoins){
+Rogue& Rogue::addCoins(const int numOfCoins){
     assert(numOfCoins);
     if (numOfCoins < 0){
         return *this;
@@ -23,6 +23,6 @@ Rouge& Rouge::addCoins(const int numOfCoins){
     return *this;
 }
 
-void Rouge::printInfo(ostream &os) const {
-    printPlayerDetails(os,m_name,"Rouge",m_level,m_force,m_HP,m_coins);
+void Rogue::printInfo(ostream &os) const {
+    printPlayerDetails(os,m_name,"Rogue",m_level,m_force,m_HP,m_coins);
 }
