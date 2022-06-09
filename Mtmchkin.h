@@ -6,6 +6,10 @@
 #include <queue>
 #include "Cards/Card.h"
 
+
+
+
+
 class Mtmchkin{
 
 public:
@@ -55,6 +59,14 @@ private:
     static bool checkCardType(const std::string& card);
     static std::shared_ptr<Card> getPointerToNewCard(const std::string& cardName);
     std::queue<std::shared_ptr<Card>> m_CardDeck;
+    std::queue<std::unique_ptr<Player>> m_PlayersQueue;
+    static int getNumberOfPlayers();
+    static std::queue<std::unique_ptr<Player>> createPlayersQueue(int numberOfPlayers);
+    static bool checkPlayerName(const std::string& playerName);
+    static bool checkPlayerType(const std::string& playerType);
+    static void pushingPlayerToQueue(std::queue<std::unique_ptr<Player>> &Players, const std::string &playerType, const std::string &playerName); //add bad alloc
+    static const int meow = 5;
+
 };
 
 
