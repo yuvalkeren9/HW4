@@ -3,8 +3,6 @@
 //
 
 #include "Vampire.h"
-#include "Cards/Card.h"
-#include "utilities.h"
 #include <iostream>
 
 using std::cout;

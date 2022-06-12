@@ -3,12 +3,6 @@
 #include <iostream>
 #include <cassert>
 
-#include "Players/Player.h"
-#include "Players/Fighter.h"
-#include "Players/Wizard.h"
-#include "Players/Rogue.h"
-
-
 
 using std::ostream;
 
@@ -127,7 +121,7 @@ int Player::getCoins(){
 int Player::getHP(){
     return this->m_HP;
 }
-ostream& operator<<(ostream& os, Player& player) {
+ostream& operator<<(ostream& os,const Player& player) {
     player.printInfo(os);
     return  os;
 }

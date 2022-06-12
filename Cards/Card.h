@@ -6,7 +6,7 @@
 
 #include <string>
 #include "../Players/Player.h"
-#include "utilities.h"
+#include "../utilities.h"
 
 
 /** transfer this to a new file in the future my man  */
@@ -102,7 +102,7 @@ public:
     Card(const Card&) = default;
     virtual ~Card() = default;
     Card& operator=(const Card& other) = default;
-    friend std::ostream& operator<<(std::ostream& os, Card& card);
+    friend std::ostream& operator<<(std::ostream& os, const Card& card);
 
 
 private:

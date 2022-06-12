@@ -5,7 +5,7 @@
 #ifndef CARD_CPP_DRAGON_H
 #define CARD_CPP_DRAGON_H
 
-#include "Cards/Card.h"
+#include "Card.h"
 
 class Dragon : public Card {
 public:

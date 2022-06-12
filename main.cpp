@@ -3,14 +3,17 @@
 //
 
 #include "utilities.h"
+/*
 #include <cstring>
 #include "Players/Player.h"
 #include <queue>
 #include "Players/Wizard.h"
 #include "Players/Fighter.h"
 #include "Players/Rogue.h"
+#include "Exception.h" */
+
 #include <memory>
-#include "Exception.h"
+
 #include "Mtmchkin.h"
 
 using std::cin;
@@ -28,13 +31,6 @@ using namespace std;
 
 int main(){
     Mtmchkin game("deck.txt");
-    game.playRound();
-    game.playRound();
-    game.playRound();
-    game.playRound();
-    game.playRound();
-    game.printLeaderBoard();
-
     return 0;
 
 }

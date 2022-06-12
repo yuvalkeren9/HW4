@@ -3,7 +3,6 @@
 //
 
 #include "Dragon.h"
-#include "Cards/Card.h"
 #include "utilities.h"
 #include <iostream>
 

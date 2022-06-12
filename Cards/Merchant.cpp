@@ -3,7 +3,6 @@
 //
 
 #include "Merchant.h"
-#include "utilities.h"
 using std::cin;
 using std::cout;
 using std::endl;

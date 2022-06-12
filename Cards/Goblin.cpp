@@ -3,10 +3,8 @@
 //
 
 #include "Goblin.h"
-#include "Cards/Card.h"
 #include "utilities.h"
 #include <iostream>
-#include "Players/player.h"
 using std::string;
 using std::cout;
 using std::endl;

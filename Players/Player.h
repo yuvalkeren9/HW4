@@ -59,7 +59,7 @@ public:
     /** decreases the player's amount of coins by the amount received as argument. If player doesn't have enough coins, nothing will happen
      * and function will return false. If succeeded, true will be returned.*/
     bool pay(const int price);
-    friend std::ostream& operator<<(std::ostream& os,Player& player);
+    friend std::ostream& operator<<(std::ostream& os, const Player& player);
 
 
         protected:

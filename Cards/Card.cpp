@@ -13,7 +13,7 @@ Card::Card(CardType type, const CardStats& stats) :
     m_stats(stats){
 }
 
-ostream& operator<<(ostream& os, Card& card){
+ostream& operator<<(ostream& os, const Card& card){
     card.printInfo();
     return os;
 }

@@ -5,7 +5,7 @@
 #ifndef CARD_CPP_VAMPIRE_H
 #define CARD_CPP_VAMPIRE_H
 
-#include "Cards/Card.h"
+#include "Card.h"
 
 class Vampire : public Card {
 public:
