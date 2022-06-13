@@ -18,11 +18,6 @@ struct CardStats{
     int loot; // The profit you get when winning a battle or when getting a "Treasure" card
     int hpLossOnDefeat; // The amount of hp you lose when losing the battle
 
-    int cost; // The cost of a "Buff/Heal" card
-    int heal; // The amount of HP you get when buying a "HEAL" card
-    int buff; // The amount of force you get when buying a "BUFF" card
-
-
     /*
      *C'tor of CardStats:
      *
@@ -38,9 +33,6 @@ struct CardStats{
     explicit CardStats(int force = 0, int hpLoss = 0, int cost = 0, int heal = 0, int buff = 0, int loot = 0) {
         this->force = force;
         this->hpLossOnDefeat = hpLoss;
-        this->cost = cost;
-        this->heal = heal;
-        this->buff = buff;
         this->loot = loot;
     }
 };
@@ -56,7 +48,6 @@ struct CardStats{
  *  HEAL - Increase your player's HP by 'm_heal' points  of CardStats (no more than maxHP points).
  *  TREASURE - Get 'm_profit' coins of CardStats.
 */
-enum class CardType {Battle, Buff, Heal, Treasure}; // The type of the Card
 
 class Card {
 public:
@@ -68,7 +59,7 @@ public:
      * @return
      *      A new instance of Card.
     */
-    Card(CardType type, const CardStats& stats);
+    Card(const CardStats& stats);
 
 
     /*
@@ -93,7 +84,7 @@ public:
     /*
      * C'tor to the "default card" - Treasure card that gives 0 coins
     */
-    Card(): m_effect(CardType::Treasure), m_stats() {}
+    Card(): m_stats() {}
 
 
     /*
@@ -110,7 +101,7 @@ private:
 
 protected:
     CardStats m_stats;
-    CardType m_effect;
+
 
 };
 

@@ -3,7 +3,6 @@
 //
 
 #include "Goblin.h"
-#include "utilities.h"
 #include <iostream>
 using std::string;
 using std::cout;

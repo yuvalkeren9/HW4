@@ -36,6 +36,7 @@ using std::deque;
 
 /** Mtmchkin Constructor */
 Mtmchkin::Mtmchkin(const std::string fileName) : m_CurrentRoundNum(0) {
+    printStartGameMessage();
     ifstream source(fileName);
     if(!source){
         throw DeckFileNotFound();
@@ -56,7 +57,6 @@ Mtmchkin::Mtmchkin(const std::string fileName) : m_CurrentRoundNum(0) {
         throw DeckFileInvalidSize();
     }
     /** Now we initialise the player */
-    printStartGameMessage();
     m_numOfPlayers = getNumberOfPlayers();
     try {
         m_PlayersVector = createPlayersVector(m_numOfPlayers);
@@ -170,22 +170,28 @@ shared_ptr<Card> Mtmchkin::getPointerToNewCard(const string& cardName){
 
 int Mtmchkin::getNumberOfPlayers(){
     printEnterTeamSizeMessage();
-    int numOfPlayers;
-    cin >> numOfPlayers;
-    while (cin.fail() || (numOfPlayers < 2) || (numOfPlayers > 6)){
-        printInvalidTeamSize();
-        cin.clear();
-        cin.ignore(256, '\n');             //CHANGE IT SO 2a DOESNT WORK
-        printEnterTeamSizeMessage();
-        cin >> numOfPlayers;
+    const string allNums = "0123456789";
+    bool wasCorrectInputScannedFlag = false;
+    string playerDecisionInput;
+    while (!wasCorrectInputScannedFlag){
+        std::getline(cin, playerDecisionInput);
+        if (playerDecisionInput.find_first_not_of(allNums) != string::npos){
+            printInvalidTeamSize();
+            continue;
+        }
+        int numOfPlayersTemp = stoi(playerDecisionInput);
+        if (numOfPlayersTemp < 2 || numOfPlayersTemp > 6){
+            printInvalidTeamSize();
+            continue;
+        }
+        wasCorrectInputScannedFlag = true;
     }
-    cin.ignore();
+    int numOfPlayers = stoi(playerDecisionInput);
     return numOfPlayers;
 }
 
 
 vector<shared_ptr<Player>> Mtmchkin::createPlayersVector(int numberOfPlayers){
-    int counter = 0;
     vector<shared_ptr<Player>> temp;
     for (int i=0; i < numberOfPlayers; ++i) {
         bool flag = false;
@@ -193,10 +199,8 @@ vector<shared_ptr<Player>> Mtmchkin::createPlayersVector(int numberOfPlayers){
         while (flag == false) {
             string playerName;
             cin >> playerName;
-            //getline(cin, playerName, ' ');
             string playerType;
             cin >> playerType;
-            //getline(cin, playerType);
             if (!checkPlayerName(playerName)) {
                 printInvalidName();
                 continue;
@@ -209,19 +213,8 @@ vector<shared_ptr<Player>> Mtmchkin::createPlayersVector(int numberOfPlayers){
                 pushingPlayerToVector(temp, playerType, playerName);
             }
             catch (std::bad_alloc &e) {};    //dont forget to do something
-//        if (playerType == "Wizard"){
-//            //shared_ptr<Player> tempWizard(new Wizard(playerName));
-//            temp.push(shared_ptr<Player> (new Wizard(playerName)));
-//        }
-//        else if (playerType == "Fighter"){
-//            //shared_ptr<Player> tempFighter(new Fighter(playerName));
-//            temp.push(shared_ptr<Player> (new Fighter(playerName)));
-//        }
-//        else {
-//            //shared_ptr<Player> tempRogue(new Rogue(playerName));
-//            temp.push(shared_ptr<Player> (new Rogue(playerName)));
-//        }
             flag = true;
+            cin.ignore();
         }
     }
     return temp;

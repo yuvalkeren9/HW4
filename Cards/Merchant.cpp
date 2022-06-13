@@ -7,6 +7,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
+using std::stoi;
 
 
 
@@ -14,15 +15,23 @@ using std::string;
 
 void Merchant::applyEncounter(Player& player) const{
     printMerchantInitialMessageForInteractiveEncounter(cout, player.getName(), player.getCoins());
-    int playerDecision;
-    cin >> playerDecision;
-    while (cin.fail() || (playerDecision < 0) || (playerDecision > 2)){
-        printInvalidInput();
-        cin.clear();
-        cin.ignore(256, '\n');
-        cin >> playerDecision;
+    const string allNums = "0123456789";
+    bool wasCorrectInputScannedFlag = false;
+    string playerDecisionInput;
+    while (!wasCorrectInputScannedFlag){
+        std::getline(cin, playerDecisionInput);
+        if (playerDecisionInput.find_first_not_of(allNums) != string::npos){
+            printInvalidInput();
+            continue;
+        }
+        int playerDecisionTemp = stoi(playerDecisionInput);
+        if (playerDecisionTemp < 0 || playerDecisionTemp > 2){
+            printInvalidInput();
+            continue;
+        }
+        wasCorrectInputScannedFlag = true;
     }
-    //check if correct input was entered, and ask for correct one until it is solved
+    int playerDecision = stoi(playerDecisionInput);
     switch (playerDecision){
         case 0 : {
             printMerchantSummary(cout, player.getName(), 0, 0);
@@ -31,6 +40,7 @@ void Merchant::applyEncounter(Player& player) const{
         case 1 : {
             if (player.getCoins() < priceOfHealthPotion){
                 printMerchantInsufficientCoins(cout);
+                printMerchantSummary(cout, player.getName(), 1, 0);
                 break;
             }
             else {
@@ -43,6 +53,7 @@ void Merchant::applyEncounter(Player& player) const{
         case 2 : {
             if (player.getCoins() < priceOfBuffBoost){
                 printMerchantInsufficientCoins(cout);
+                printMerchantSummary(cout, player.getName(), 2, 0);
                 break;
             }
             else {
