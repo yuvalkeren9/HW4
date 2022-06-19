@@ -34,4 +34,17 @@ void Vampire::applyEncounter(Player& player) const{
     }
 }
 
+int Vampire::getStats(int typeOfStat) const {
+    switch (typeOfStat){
+        case 0:
+            return m_stats.force;
+        case 1:
+            return m_stats.hpLossOnDefeat;
+        case 2:
+            return m_stats.loot;
+        default:
+            return 0;
+    }
+}
+
 

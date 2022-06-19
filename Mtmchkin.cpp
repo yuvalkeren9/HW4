@@ -15,6 +15,8 @@
 #include "Cards/Barfight.h"
 #include "Cards/Pitfall.h"
 #include "Cards/Fairy.h"
+#include "Cards/Gang.h"
+#include "Cards/BattleCard.h"
 #include "utilities.h"
 
 
@@ -44,14 +46,20 @@ Mtmchkin::Mtmchkin(const std::string fileName) : m_CurrentRoundNum(0) {
     int currentLine =1;
     string cardName;
     while (getline(source, cardName)){
-        //getline(source, cardName);
         if (!checkCardType(cardName)){
             string error = std::to_string(currentLine);
             throw DeckFileFormatError(error);
         }
-        shared_ptr<Card> tempPtr= getPointerToNewCard(cardName);
-        this->m_CardDeck.push(tempPtr);
-        ++currentLine;
+        if (cardName == "Gang"){
+            shared_ptr<Card> tempPtr = getPointerToNewGang(source, currentLine );
+            this->m_CardDeck.push(tempPtr);
+            cout <<" meow";
+            }
+        else {
+            shared_ptr<Card> tempPtr = getPointerToNewCard(cardName);
+            this->m_CardDeck.push(tempPtr);
+            ++currentLine;
+        }
     }
     if( m_CardDeck.size() < 5){
         throw DeckFileInvalidSize();
@@ -128,8 +136,8 @@ void Mtmchkin::printLeaderBoard() const {
 /** Card Initilzing Functions */
 
 bool Mtmchkin::checkCardType(const std::string& card){
-    string availableCardTypes[] = {"Goblin", "Vampire", "Dragon", "Pitfall", "Fairy", "Barfight", "Merchant", "Treasure"};
-    for (int i=0; i < 8; ++i){
+    string availableCardTypes[] = {"Goblin", "Vampire", "Dragon", "Pitfall", "Fairy", "Barfight", "Merchant", "Treasure", "Gang"};
+    for (int i=0; i < 9; ++i){
         if (card == availableCardTypes[i]){
             return true;
         }
@@ -288,4 +296,30 @@ void Mtmchkin::updateLeaderboard(bool isWinner, vector<shared_ptr<Player>>::iter
         ++it;
     }
     m_stillInGame.erase(it);
+}
+
+shared_ptr<Card> Mtmchkin::getPointerToNewGang(ifstream& source, int& currentLine ){
+    deque<shared_ptr<BattleCard>> tempDeque;
+    std::string currentGangMember;
+    bool reachedEndOfGangFlag = false;
+    while (!reachedEndOfGangFlag) {
+        if (!getline(source, currentGangMember)) {
+            string error = std::to_string(currentLine);
+            throw DeckFileFormatError(error);
+        }
+        if (currentGangMember == "EndGang"){
+            reachedEndOfGangFlag = true;
+        }
+        else if (currentGangMember == "Goblin"){
+            tempDeque.push_back(shared_ptr<BattleCard>(new Goblin()));
+        }
+        else if( currentGangMember == "Vampire"){
+            tempDeque.push_back(shared_ptr<BattleCard>(new Vampire()));
+        }
+        else if( currentGangMember == "Dragon"){
+            tempDeque.push_back(shared_ptr<BattleCard>(new Dragon()));
+        }
+        ++currentLine;
+    }
+    return shared_ptr<Card>(new Gang(tempDeque));
 }

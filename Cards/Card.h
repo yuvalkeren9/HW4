@@ -100,9 +100,9 @@ private:
 
 
 protected:
+
+
     CardStats m_stats;
-
-
 };
 
 

@@ -68,6 +68,8 @@ private:
     std::deque<std::shared_ptr<Player>> m_Losers;
     void updateLeaderboard(bool isWinner, std::vector<std::shared_ptr<Player>>::iterator& playerIt, int index);
 
+    static std::shared_ptr<Card> getPointerToNewGang(std::ifstream& source, int& currentLine );
+
 
     static int getNumberOfPlayers();
     static std::vector<std::shared_ptr<Player>> createPlayersVector(int numberOfPlayers);

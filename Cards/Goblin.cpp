@@ -27,8 +27,22 @@ void Goblin::applyEncounter(Player& player) const{
                 player.levelUp();
                 player.addCoins(this->m_stats.loot);
                 printWinBattle(player.getName(), "Goblin");
-            } else {
+            }
+    else {
                player.damage(this->m_stats.hpLossOnDefeat);
                printLossBattle(player.getName(), "Goblin");
             }
+}
+
+int Goblin::getStats(int typeOfStat) const {
+    switch (typeOfStat){
+        case 0:
+            return m_stats.force;
+        case 1:
+            return m_stats.hpLossOnDefeat;
+        case 2:
+            return m_stats.loot;
+        default:
+            return 0;
+    }
 }

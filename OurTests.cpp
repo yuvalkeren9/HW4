@@ -15,6 +15,8 @@
 #include "Cards/Pitfall.h"
 #include "Cards/Vampire.h"
 #include "Cards/Treasure.h"
+#include "Cards/BattleCard.h"
+#include "Mtmchkin.h"
 using std::cout;
 using std::endl;
 using std::string;
@@ -23,6 +25,11 @@ using std::string;
 
 
 int main() {
+    Mtmchkin game("deckj.txt");
+    while(!game.isGameOver() && game.getNumberOfRounds() < 100) {
+        game.playRound();
+    }
+    game.printLeaderBoard();
     Dragon dragon;
     Goblin goblin;
     Vampire vampire;
@@ -31,7 +38,7 @@ int main() {
     Pitfall pitfall;
     Treasure treasure;
     Merchant merchant;
-    Rouge ganav("Cenzor", 3);
+    Rogue ganav("Cenzor", 3);
     Wizard harry("HarryPotter", 2);
     Fighter habib("Habib", 500);
     cout << ganav << endl;

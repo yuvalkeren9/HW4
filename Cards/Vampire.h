@@ -5,15 +5,16 @@
 #ifndef CARD_CPP_VAMPIRE_H
 #define CARD_CPP_VAMPIRE_H
 
-#include "Card.h"
+#include "BattleCard.h"
 
-class Vampire : public Card {
+class Vampire : public BattleCard {
 public:
     Vampire();
     ~Vampire() override = default;
     Vampire(Vampire& vampire) = default;
     void printInfo() const override;
     void applyEncounter(Player& player) const override;
+    int getStats(int typeOfStat) const override;
 
 
 
