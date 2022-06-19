@@ -51,9 +51,9 @@ Mtmchkin::Mtmchkin(const std::string fileName) : m_CurrentRoundNum(0) {
             throw DeckFileFormatError(error);
         }
         if (cardName == "Gang"){
+            ++currentLine;
             shared_ptr<Card> tempPtr = getPointerToNewGang(source, currentLine );
             this->m_CardDeck.push(tempPtr);
-            cout <<" meow";
             }
         else {
             shared_ptr<Card> tempPtr = getPointerToNewCard(cardName);
@@ -318,6 +318,10 @@ shared_ptr<Card> Mtmchkin::getPointerToNewGang(ifstream& source, int& currentLin
         }
         else if( currentGangMember == "Dragon"){
             tempDeque.push_back(shared_ptr<BattleCard>(new Dragon()));
+        }
+        else{
+            string error = std::to_string(currentLine);
+            throw DeckFileFormatError(error);
         }
         ++currentLine;
     }
