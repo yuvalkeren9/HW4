@@ -10,10 +10,10 @@
 class BattleCard : public Card {
 public:
     BattleCard() = default;
-    virtual ~BattleCard() override = default;
+    ~BattleCard() override = default;
     BattleCard(BattleCard& BattleCard) = default;
-    virtual void printInfo() const override = 0;
-    virtual void applyEncounter(Player& player)  const override = 0;
+   // virtual void printInfo() const override = 0;
+    //virtual void applyEncounter(Player& player)  const override = 0;
     /**
      *
      * @param typeOfStat 0 for force, 1 for hpLossOnDefeat, 2 for loot
