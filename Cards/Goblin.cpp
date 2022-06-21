@@ -22,6 +22,7 @@ void Goblin::printInfo() const{
     printEndOfCardDetails(cout);
 }
 
+
 void Goblin::applyEncounter(Player& player) const{
     if (player.getAttackStrength() >= this->m_stats.force) {
                 player.levelUp();
@@ -45,4 +46,9 @@ int Goblin::getStats(int typeOfStat) const {
         default:
             return 0;
     }
+}
+
+void Goblin::gangEncounter (Player &player) const {
+    player.damage(this->m_stats.hpLossOnDefeat);
+    printLossBattle(player.getName(), "Goblin");
 }

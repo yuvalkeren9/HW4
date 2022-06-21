@@ -82,7 +82,7 @@ void Mtmchkin::playRound(){
     for (vector<shared_ptr<Player>>::iterator it = m_PlayersVector.begin(); it != m_PlayersVector.end(); ){
             printTurnStartMessage((**it).getName());
             m_CardDeck.front()->applyEncounter(**it);
-            shared_ptr<Card> temp = m_CardDeck.front();   //maybe do as function (maybe)
+            shared_ptr<Card> temp = m_CardDeck.front();   //moving the card to the end of the file
             m_CardDeck.push(temp);
             m_CardDeck.pop();
         if ((**it).isKnockedOut()){
@@ -177,16 +177,26 @@ shared_ptr<Card> Mtmchkin::getPointerToNewCard(const string& cardName){
 /** Player initializing functions */
 
 int Mtmchkin::getNumberOfPlayers(){
-    printEnterTeamSizeMessage();
     const string allNums = "0123456789";
     bool wasCorrectInputScannedFlag = false;
     string playerDecisionInput;
     while (!wasCorrectInputScannedFlag){
+        printEnterTeamSizeMessage();
         std::getline(cin, playerDecisionInput);
-        if (playerDecisionInput.find_first_not_of(allNums) != string::npos){
+        if(playerDecisionInput.length() != 1)
+        {
             printInvalidTeamSize();
             continue;
         }
+        char tempChar = playerDecisionInput[0];
+        if(!std::isdigit(tempChar)){
+            printInvalidTeamSize();
+            continue;
+        }
+//        if (playerDecisionInput.find_first_not_of(allNums) != string::npos){
+//            printInvalidTeamSize();
+//            continue;
+//        }
         int numOfPlayersTemp = stoi(playerDecisionInput);
         if (numOfPlayersTemp < 2 || numOfPlayersTemp > 6){
             printInvalidTeamSize();
@@ -206,9 +216,9 @@ vector<shared_ptr<Player>> Mtmchkin::createPlayersVector(int numberOfPlayers){
         printInsertPlayerMessage();
         while (flag == false) {
             string playerName;
-            cin >> playerName;
+            std::getline(cin, playerName, ' ');
             string playerType;
-            cin >> playerType;
+            std::getline(cin, playerType);
             if (!checkPlayerName(playerName)) {
                 printInvalidName();
                 continue;
@@ -222,7 +232,7 @@ vector<shared_ptr<Player>> Mtmchkin::createPlayersVector(int numberOfPlayers){
             }
             catch (std::bad_alloc &e) {};    //dont forget to do something
             flag = true;
-            cin.ignore();
+            //cin.ignore();
         }
     }
     return temp;

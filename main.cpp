@@ -11,7 +11,6 @@
 #include "Players/Fighter.h"
 #include "Players/Rogue.h"
 #include "Exception.h" */
-#include "Exception.h"
 #include <memory>
 
 #include "Mtmchkin.h"

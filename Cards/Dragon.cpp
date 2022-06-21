@@ -46,6 +46,12 @@ int Dragon::getStats(int typeOfStat) const {
     }
 }
 
+void Dragon::gangEncounter (Player &player) const {
+    int damageToInflict = player.getHP();
+    player.damage(damageToInflict);
+    printLossBattle(player.getName(), "Dragon");
+}
+
 
 
 

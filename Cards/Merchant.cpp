@@ -20,7 +20,17 @@ void Merchant::applyEncounter(Player& player) const{
     string playerDecisionInput;
     while (!wasCorrectInputScannedFlag){
         std::getline(cin, playerDecisionInput);
-        if (playerDecisionInput.find_first_not_of(allNums) != string::npos){
+//        if (playerDecisionInput.find_first_not_of(allNums) != string::npos){
+//            printInvalidInput();
+//            continue;
+//        }
+        if(playerDecisionInput.length() != 1 ){
+            printInvalidInput();
+            continue;
+
+        }
+        char tempChar = playerDecisionInput[0];
+        if(!std::isdigit(tempChar)){
             printInvalidInput();
             continue;
         }

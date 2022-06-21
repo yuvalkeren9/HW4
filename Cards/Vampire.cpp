@@ -46,5 +46,10 @@ int Vampire::getStats(int typeOfStat) const {
             return 0;
     }
 }
+void Vampire::gangEncounter (Player &player) const{
+    player.damage(this->m_stats.hpLossOnDefeat);
+    player.decreaseForce();
+    printLossBattle(player.getName(), "Vampire");
+}
 
 

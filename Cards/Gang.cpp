@@ -15,11 +15,19 @@ void Gang::printInfo() const {
 }
 
 void Gang::applyEncounter(Player &player) const {
-    for(const std::shared_ptr<BattleCard>& gangMember : m_gangMembers){
-        if (player.getAttackStrength() >= gangMember->getStats(0)) {
-            cout << "Inside Gang" << endl;
-            gangMember->printInfo();
+    bool lostEncounterFlag = false;
+    for(const std::shared_ptr<BattleCard>& gangMember : m_gangMembers){ //what happens in empty gang?
+        if (!lostEncounterFlag && player.getAttackStrength() >= gangMember->getStats(0)) {
+            player.addCoins(gangMember->getStats(2));
         }
-
+        else{
+            lostEncounterFlag = true;
+            gangMember->gangEncounter(player);  //maybe change name (lo ikre halaaa
+        }
     }
+    if (!lostEncounterFlag){
+        player.levelUp();
+        printWinBattle(player.getName(), "Gang");
+    }
+
 }

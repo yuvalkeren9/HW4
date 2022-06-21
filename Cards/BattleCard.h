@@ -12,14 +12,18 @@ public:
     BattleCard() = default;
     ~BattleCard() override = default;
     BattleCard(BattleCard& BattleCard) = default;
-   // virtual void printInfo() const override = 0;
-    //virtual void applyEncounter(Player& player)  const override = 0;
     /**
-     *
+     * function that returns the stats of a card
      * @param typeOfStat 0 for force, 1 for hpLossOnDefeat, 2 for loot
      * @return requested stat
      */
     virtual int getStats(int typeOfStat) const = 0;
+
+    /**
+     * applying an encounter when this card is part of a gang
+     * @param player - the player to apply the gang encounter on
+     */
+    virtual void gangEncounter (Player &player) const = 0;
 
 
 };
