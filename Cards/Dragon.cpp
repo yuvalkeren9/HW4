@@ -35,11 +35,11 @@ void Dragon::applyEncounter(Player& player) const{
 
 int Dragon::getStats(int typeOfStat) const {
     switch (typeOfStat){
-        case 0:
+        case RETURN_VALUE_FORCE_FLAG:
             return m_stats.force;
-        case 1:
+        case RETURN_VALUE_HP_LOSS_FLAG:
             return m_stats.hpLossOnDefeat;
-        case 2:
+        case RETURN_VALUE_LOOT_FLAG:
             return m_stats.loot;
         default:
             return 0;

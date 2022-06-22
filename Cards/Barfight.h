@@ -13,6 +13,7 @@ public:
     Barfight() = default;
     ~Barfight() override = default;
     Barfight(Barfight& barfight) = default;
+    Barfight& operator=(const Barfight& barfight)= default;
     void printInfo() const override;
     void applyEncounter(Player& player) const override;
 private:

@@ -14,6 +14,7 @@ public:
     Gang(std::deque<std::shared_ptr<BattleCard>> gangMembers);
     ~Gang() override = default;
     Gang(Gang& gang) = default;
+    Gang& operator=(const Gang& gang)= default;
     void printInfo() const override;
     void applyEncounter(Player& player) const override;
 private:

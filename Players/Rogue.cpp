@@ -11,9 +11,11 @@ using std::endl;
 using std::string;
 using std::ostream;
 
-
+/** constructor  **/
 Rogue::Rogue(const string& name,const int force):Player( name,  force){
 }
+
+/** increasingvRogue coins by given number**/
 Rogue& Rogue::addCoins(const int numOfCoins){
     assert(numOfCoins);
     if (numOfCoins < 0){
@@ -22,7 +24,7 @@ Rogue& Rogue::addCoins(const int numOfCoins){
     this->m_coins +=2*numOfCoins;
     return *this;
 }
-
+/** printing function  **/
 void Rogue::printInfo(ostream &os) const {
     printPlayerDetails(os,m_name,"Rogue",m_level,m_force,m_HP,m_coins);
 }

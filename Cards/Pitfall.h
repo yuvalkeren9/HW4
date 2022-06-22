@@ -14,6 +14,7 @@ public:
     Pitfall() = default;
     ~Pitfall() override = default;
     Pitfall(Pitfall& pitfall) = default;
+    Pitfall& operator=(const Pitfall& pitfall)= default;
     void printInfo() const override;
     void applyEncounter(Player& player) const override;
 private:

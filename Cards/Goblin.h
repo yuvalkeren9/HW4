@@ -11,6 +11,7 @@ public:
     Goblin();
     ~Goblin() override = default;
     Goblin(Goblin& goblin) = default;
+    Goblin& operator=(const Goblin& goblin)= default;
     void printInfo() const override;
     void applyEncounter(Player& player) const override;
     int getStats(int typeOfStat) const override;

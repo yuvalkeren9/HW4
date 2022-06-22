@@ -13,6 +13,7 @@ public:
     Treasure();
     ~Treasure() override = default;
     Treasure(Treasure &treasure) = default;
+    Treasure& operator=(const Treasure& treasure)= default;
     void applyEncounter(Player& player) const override;
     void printInfo() const override;
 private:

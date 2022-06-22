@@ -12,12 +12,11 @@ public:
     Dragon();
     ~Dragon() override = default;
     Dragon(Dragon& dragon) = default;
+    Dragon& operator=(const Dragon& dragon)= default;
     void printInfo() const override;
     void applyEncounter(Player& player) const override;
     int getStats(int typeOfStat) const override;
     void gangEncounter (Player &player) const override;
-
-
 
 private:
 };

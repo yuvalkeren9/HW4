@@ -100,7 +100,10 @@ private:
 
 
 protected:
-
+    /** defining default values for the class */
+    static const int RETURN_VALUE_FORCE_FLAG = 0;
+    static const int RETURN_VALUE_HP_LOSS_FLAG = 1;
+    static const int RETURN_VALUE_LOOT_FLAG = 2;
 
     CardStats m_stats;
 };

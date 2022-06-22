@@ -10,9 +10,32 @@
 class Fighter: public Player{
 
 public:
+
+    /** basic constructors for the Player Fighter type. Notice the build constructor is not default, and has default values if not attributed by user.
+    * Also, a Fighter will always be initialized with a level 1 and 0 coins.*/
+    explicit Fighter(const std::string& name,const int force = DEFAULT_FORCE);
+
+    /** copy constructor**/
+    Fighter(const Fighter& fighter) = default;
+
+    /** assigment operator**/
+    Fighter& operator=(const Fighter&) = default;
+
+    /** destructor  **/
     ~Fighter() override =default;
-  explicit Fighter(const std::string& name,const int force = DEFAULT_FORCE);
+
+
+    /**
+ * @return the attackstrength of the fighter (calculated different from other player types)
+ */
     int getAttackStrength() const override;
+
+
+    /**
+ * the function prints the Fighter info (by asked format) to out stream that given
+ * @param os - out stream given
+ * @return os - out stream that given (for pipelining)
+ */
     void printInfo(std::ostream &os) const override;
 };
 

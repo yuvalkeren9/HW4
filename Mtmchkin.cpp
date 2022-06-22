@@ -274,24 +274,6 @@ void Mtmchkin::pushingPlayerToVector(vector<shared_ptr<Player>> &Players, const 
 
 
 /** Helper functions */
-//
-//void Mtmchkin::updateLeaderboard(bool isWinner, shared_ptr<Player>& playerPtr, int index){          //if we have time, make this an enum
-//    vector<shared_ptr<Player>> temp;
-//    shared_ptr<Player> tempPtr = playerPtr;
-//    if(isWinner){
-//        vector<shared_ptr<Player>>::iterator it = m_Leaderboard.begin();
-//        for (int i= 0; i < m_leftIndex ; ++i, ++it) {
-//            temp.push_back(*it);
-//        }
-//        temp.push_back(tempPtr);
-//        while ()
-//        m_Leaderboard.erase(it);
-//        ++m_leftIndex;
-//        for (int i = m_leftIndex; i < m_Leaderboard.size(); ++i, ++it)
-//    }
-//
-//}
-
 
 void Mtmchkin::updateLeaderboard(bool isWinner, vector<shared_ptr<Player>>::iterator& playerIt, int index){
     shared_ptr<Player> tempPtr = *playerIt;
@@ -307,6 +289,8 @@ void Mtmchkin::updateLeaderboard(bool isWinner, vector<shared_ptr<Player>>::iter
     }
     m_stillInGame.erase(it);
 }
+
+
 
 shared_ptr<Card> Mtmchkin::getPointerToNewGang(ifstream& source, int& currentLine ){
     deque<shared_ptr<BattleCard>> tempDeque;
