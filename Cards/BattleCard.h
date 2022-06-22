@@ -9,9 +9,17 @@
 
 class BattleCard : public Card {
 public:
+
+    /** constructor**/
     BattleCard() = default;
+
+    /** destructor**/
     ~BattleCard() override = default;
+
+    /** copy constructor**/
     BattleCard(BattleCard& BattleCard) = default;
+
+
     /**
      * function that returns the stats of a card
      * @param typeOfStat 0 for force, 1 for hpLossOnDefeat, 2 for loot

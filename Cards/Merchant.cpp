@@ -10,9 +10,6 @@ using std::string;
 using std::stoi;
 
 
-
-
-
 void Merchant::applyEncounter(Player& player) const{
     printMerchantInitialMessageForInteractiveEncounter(cout, player.getName(), player.getCoins());
     const string allNums = "0123456789";

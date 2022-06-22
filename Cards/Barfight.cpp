@@ -13,6 +13,8 @@ void Barfight::printInfo() const {
     printEndOfCardDetails(cout);
 }
 
+
+
 void Barfight::applyEncounter(Player &player) const {
     Player* ptr = &player;
     const Fighter* fighter = dynamic_cast<const Fighter*>(ptr);

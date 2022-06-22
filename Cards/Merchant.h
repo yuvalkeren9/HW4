@@ -8,11 +8,30 @@
 
 class Merchant : public Card {
 public:
+
+    /** constructor**/
     Merchant() = default;
+
+    /** destructor**/
     ~Merchant() override = default;
+
+    /** copy constructor**/
     Merchant(Merchant& merchant) = default;
+
+    /** assigment operator**/
     Merchant& operator=(const Merchant& merchant)= default;
+
+    /**
+      * Handling the player's applyEncounter with the card as required
+      * receiving input from user and according to input:
+      * allows to increase HP or Force and decreasing coins (if the player has enough)
+      * @param player - The player.
+      * @return  void
+      */
     void applyEncounter(Player& player) const override;
+
+
+    /** function that prints the Card's info */
     void printInfo() const override;
 
 private:

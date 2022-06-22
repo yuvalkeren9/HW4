@@ -91,8 +91,21 @@ public:
      * Here we are explicitly telling the compiler to use the default methods
     */
     Card(const Card&) = default;
+
+    /** destructor**/
     virtual ~Card() = default;
+
+    /** assigment operator**/
     Card& operator=(const Card& other) = default;
+
+
+    /**
+    * /-----  operator <<  -------/
+    * the function prints the card info (by asked format) to out stream that given
+    * @param os - out stream given
+    * @param card - card to print
+    * @return os - out stream that given (for pipelining)
+    */
     friend std::ostream& operator<<(std::ostream& os, const Card& card);
 
 
